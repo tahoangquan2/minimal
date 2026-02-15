@@ -1,5 +1,5 @@
 # Minimal
 
 ```powershell
-g++ -O3 main.cpp -o main.exe -luser32
+g++ -Ofast -march=native -mtune=native -funroll-loops -fprefetch-loop-arrays -fno-exceptions -fno-rtti main.cpp -o main
 ```
