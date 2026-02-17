@@ -1,5 +1,5 @@
 #include <windows.h>
-bool T;
+bool T, R;
 bool S(DWORD k, bool u) {
  INPUT i{};
  i.type= 1;
@@ -15,8 +15,9 @@ LRESULT CALLBACK K(int c, WPARAM w, LPARAM l) {
  if(d->flags & LLKHF_INJECTED) return CallNextHookEx(0, c, w, l);
  bool n= w == WM_KEYDOWN || w == WM_SYSKEYDOWN, u= w == WM_KEYUP || w == WM_SYSKEYUP;
  DWORD v= d->vkCode;
+ if(v == VK_RCONTROL) R= n;
  if(v == VK_CAPITAL && !S(VK_RCONTROL, u)) return CallNextHookEx(0, c, w, l);
- bool a= (GetAsyncKeyState(VK_LCONTROL) & 0x8000) && (GetAsyncKeyState(VK_RCONTROL) & 0x8000);
+ bool a= (GetAsyncKeyState(VK_LCONTROL) & 0x8000) && R;
  if(!a)
   T= 0;
  else if(n && !T && S(VK_CAPITAL, 0) && S(VK_CAPITAL, 1))
